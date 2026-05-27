@@ -461,45 +461,31 @@
       <div class="category-header">
         <span class="category-label">Siding</span>
         <span class="category-line"></span>
-        <span class="category-count">1 Project · 3 Stages</span>
+        <span class="category-count">1 Project</span>
       </div>
       <div class="projects-grid">
 
-        <!-- Siding 3-Stage Slider -->
-        <div class="project-card" style="grid-column: 1 / -1; max-width: 700px;">
-          <div class="tri-slider-wrap" id="siding-slider">
-            <!-- All 3 images stacked; JS controls which two are visible -->
-            <div class="tri-img" id="tri-img-0">
+        <!-- Siding Before/After Slider -->
+        <div class="project-card">
+          <div class="slider-wrap" data-lightbox-group="siding">
+            <div class="slider-img before">
               <img src="WhatsApp Image 2026-05-24(7).jpeg" alt="Siding before" loading="lazy" />
+              <span class="badge-before">Before</span>
             </div>
-            <div class="tri-img tri-top" id="tri-img-1" style="clip-path: inset(0 50% 0 0);">
-              <img src="WhatsApp Image 2026-05-24(8).jpeg" alt="Siding during" loading="lazy" />
-            </div>
-            <div class="tri-img tri-top" id="tri-img-2" style="clip-path: inset(0 50% 0 0); display:none;">
+            <div class="slider-img after">
               <img src="WhatsApp Image 2026-05-24(9).jpeg" alt="Siding after" loading="lazy" />
+              <span class="badge-after">After</span>
             </div>
-
-            <!-- Stage badges -->
-            <span class="badge-before" id="tri-badge-left">Before</span>
-            <span class="badge-after"  id="tri-badge-right">During</span>
-
-            <!-- Slider handle -->
-            <div class="slider-handle" id="tri-handle">
+            <div class="slider-handle">
               <div class="slider-arrows">
                 <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
                 <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
               </div>
             </div>
-
-            <!-- Stage toggle buttons -->
-            <div class="tri-stage-btns">
-              <button class="tri-stage-btn active" data-stage="0">Before / During</button>
-              <button class="tri-stage-btn" data-stage="1">During / After</button>
-            </div>
           </div>
           <div class="project-info">
             <div class="project-title">Exterior Siding</div>
-            <div class="project-sub">Bergen County · Full siding replacement · Use buttons to switch stages</div>
+            <div class="project-sub">Bergen County · Full siding replacement</div>
           </div>
         </div>
 
