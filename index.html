@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Daniel General Contractor LLC | Family-Owned · Maywood, NJ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,600&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --brown-deep:   #3d2008;
+    --brown-dark:   #4a2c0a;
+    --brown-mid:    #6a3c14;
+    --orange:       #d4793a;
+    --orange-deep:  #b85e24;
+    --orange-light: #f5a85a;
+    --cream:        #fdf8f2;
+    --cream-2:      #f7efe3;
+    --cream-3:      #efe4d4;
+    --sand:         #e8ddd0;
+    --text-warm:    #5a3a20;
+    --text-mid:     #7a6050;
+    --text-muted:   #9a8070;
+    --font-serif:   'Lora', Georgia, serif;
+    --font-sans:    'Nunito', system-ui, sans-serif;
+    --radius-sm:    4px;
+    --radius-md:    10px;
+    --radius-lg:    16px;
+    --radius-pill:  999px;
+    --transition:   0.3s ease;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--cream); color: var(--brown-deep); overflow-x: hidden; }
+
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
+  .section-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; color: var(--orange); margin-bottom: 0.8rem; }
+  .section-tag::before { content: ''; display: block; width: 24px; height: 2px; background: var(--orange); border-radius: 2px; }
+  .section-title { font-family: var(--font-serif); font-size: clamp(1.9rem, 3vw, 2.8rem); font-weight: 700; line-height: 1.18; color: var(--brown-deep); }
+  .section-title.light { color: #fdf2e3; }
+  .divider { width: 40px; height: 3px; background: var(--orange); border-radius: 2px; margin: 1rem 0 2rem; }
+
+  /* HEADER */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(61, 32, 8, 0.97); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(212,121,58,0.2);
+    transition: var(--transition);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+  .logo { text-decoration: none; display: flex; flex-direction: column; }
+  .logo-main { font-family: var(--font-serif); font-size: 1.1rem; color: #f5ddb0; font-weight: 700; line-height: 1.1; }
+  .logo-sub { font-size: 0.58rem; letter-spacing: 0.22em; color: #a07850; text-transform: uppercase; margin-top: 2px; }
+  nav { display: flex; align-items: center; gap: 2rem; }
+  nav a { color: #c09070; font-size: 0.82rem; letter-spacing: 0.04em; text-decoration: none; transition: color var(--transition); font-weight: 500; }
+  nav a:hover { color: #f5ddb0; }
+  .nav-cta {
+    background: var(--orange) !important; color: #fff !important;
+    font-size: 0.72rem !important; font-weight: 700 !important; letter-spacing: 0.1em !important;
+    padding: 10px 22px; border-radius: var(--radius-pill); text-transform: uppercase;
+    transition: background var(--transition) !important;
+  }
+  .nav-cta:hover { background: var(--orange-deep) !important; }
+  .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .nav-toggle span { display: block; width: 24px; height: 2px; background: #f5ddb0; transition: var(--transition); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; padding-top: 70px;
+    background: var(--brown-deep);
+    display: grid; grid-template-columns: 1.1fr 0.9fr;
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(135deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 14px);
+    pointer-events: none;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 3rem 5rem 0; max-width: 580px; margin-left: auto;
+    position: relative; z-index: 1;
+    animation: fadeUp 0.85s ease forwards;
+  }
+  .hero-eyebrow { display: flex; align-items: center; gap: 10px; font-size: 0.7rem; letter-spacing: 0.22em; color: var(--orange); text-transform: uppercase; font-weight: 700; margin-bottom: 1.4rem; }
+  .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 2px; background: var(--orange); border-radius: 2px; }
+  .hero-left h1 { font-family: var(--font-serif); font-size: clamp(2.4rem, 3.8vw, 3.5rem); font-weight: 700; color: #fdf2e3; line-height: 1.15; margin-bottom: 1.4rem; }
+  .hero-left h1 em { color: var(--orange-light); font-style: italic; }
+  .hero-left p { font-size: 1rem; color: #b08060; line-height: 1.85; max-width: 430px; margin-bottom: 2.2rem; font-weight: 400; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--orange); color: #fff; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 30px; border-radius: var(--radius-pill); text-decoration: none; transition: background var(--transition); }
+  .btn-primary:hover { background: var(--orange-deep); }
+  .btn-outline { border: 1.5px solid rgba(212,121,58,0.35); color: #c09070; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 30px; border-radius: var(--radius-pill); text-decoration: none; transition: border-color var(--transition), color var(--transition); }
+  .btn-outline:hover { border-color: var(--orange); color: var(--orange-light); }
+
+  .hero-right {
+    background: rgba(255,255,255,0.04); border-left: 1px solid rgba(255,255,255,0.06);
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    padding: 5rem 3rem; position: relative; z-index: 1;
+    animation: fadeUp 0.85s ease 0.18s both;
+  }
+  .hero-badge {
+    width: 100px; height: 100px; border-radius: 50%;
+    background: var(--orange); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; margin-bottom: 2.5rem;
+    border: 3px solid rgba(255,255,255,0.15);
+  }
+  .hero-badge .num { font-family: var(--font-serif); font-size: 1.9rem; font-weight: 700; color: #fff; line-height: 1; }
+  .hero-badge .lbl { font-size: 0.58rem; color: rgba(255,255,255,0.85); font-weight: 600; letter-spacing: 0.04em; text-align: center; line-height: 1.4; }
+  .hero-info { display: flex; flex-direction: column; gap: 0; width: 100%; }
+  .hero-info-item { padding: 1.2rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .hero-info-item:last-child { border-bottom: none; }
+  .hero-info-item .lbl { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: #6a4828; margin-bottom: 0.25rem; font-weight: 600; }
+  .hero-info-item .val { font-size: 0.95rem; color: #e8c898; font-weight: 500; }
+  .hero-info-item .val a { color: var(--orange-light); text-decoration: none; }
+
+  /* STATS */
+  .stats-bar { background: var(--orange); }
+  .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stat-item { padding: 1.8rem 2rem; border-right: 1px solid rgba(255,255,255,0.2); }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: #fff; line-height: 1; }
+  .stat-label { font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-top: 0.35rem; font-weight: 600; }
+
+  /* SERVICES */
+  #services { padding: 7rem 0; background: var(--cream); }
+  .services-header { max-width: 540px; margin-bottom: 3.5rem; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .svc-card {
+    background: #fff; border: 1px solid var(--sand); border-radius: var(--radius-lg);
+    padding: 2.2rem 1.8rem; position: relative; overflow: hidden;
+    transition: border-color var(--transition), transform var(--transition);
+    border-top: 4px solid var(--orange);
+  }
+  .svc-card:hover { border-color: var(--orange); transform: translateY(-5px); }
+  .svc-icon { width: 52px; height: 52px; background: var(--cream-2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; border: 2px solid var(--cream-3); }
+  .svc-icon svg { width: 24px; height: 24px; stroke: var(--orange); fill: none; stroke-width: 1.8; }
+  .svc-card h3 { font-family: var(--font-serif); font-size: 1.1rem; color: var(--brown-deep); margin-bottom: 0.75rem; font-weight: 700; }
+  .svc-card p { font-size: 0.88rem; color: var(--text-mid); line-height: 1.78; font-weight: 400; }
+
+  /* ABOUT */
+  #about { padding: 7rem 0; background: var(--cream-2); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-left p { font-size: 0.95rem; color: var(--text-mid); line-height: 1.9; margin-bottom: 1.2rem; }
+  .about-checklist { list-style: none; margin: 1.8rem 0; display: flex; flex-direction: column; gap: 0.85rem; }
+  .about-checklist li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.9rem; color: var(--text-warm); font-weight: 500; }
+  .about-checklist li::before { content: ''; display: block; width: 20px; height: 2px; background: var(--orange); margin-top: 0.55rem; flex-shrink: 0; border-radius: 2px; }
+  .about-right { display: flex; flex-direction: column; gap: 1.2rem; }
+  .about-card { background: #fff; border: 1px solid var(--sand); border-radius: var(--radius-lg); padding: 1.8rem; }
+  .about-card-icon { width: 44px; height: 44px; background: var(--cream-2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+  .about-card-icon svg { width: 22px; height: 22px; stroke: var(--orange); fill: none; stroke-width: 1.8; }
+  .about-card h4 { font-family: var(--font-serif); font-size: 1rem; color: var(--brown-deep); margin-bottom: 0.5rem; font-weight: 700; }
+  .about-card p { font-size: 0.85rem; color: var(--text-mid); line-height: 1.75; }
+
+  /* TESTIMONIAL STRIP */
+  .testimonial-strip { background: var(--brown-dark); padding: 5rem 0; }
+  .testimonial-strip .section-tag { color: var(--orange-light); }
+  .testimonial-strip .section-tag::before { background: var(--orange-light); }
+  .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .test-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-lg); padding: 1.8rem; }
+  .test-stars { color: var(--orange); font-size: 0.9rem; letter-spacing: 0.05em; margin-bottom: 1rem; }
+  .test-card p { font-size: 0.88rem; color: #c09070; line-height: 1.8; font-style: italic; margin-bottom: 1.2rem; font-family: var(--font-serif); }
+  .test-author { display: flex; align-items: center; gap: 10px; }
+  .test-avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(212,121,58,0.25); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: var(--orange-light); }
+  .test-name { font-size: 0.82rem; color: #e8c898; font-weight: 600; }
+  .test-loc { font-size: 0.72rem; color: #7a5838; }
+
+  /* PROCESS */
+  #process { padding: 7rem 0; background: var(--cream); }
+  .process-header { text-align: center; max-width: 540px; margin: 0 auto 5rem; }
+  .process-header .section-tag { justify-content: center; }
+  .process-header .divider { margin: 1rem auto 0; }
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+  .process-step { text-align: center; }
+  .step-num { width: 60px; height: 60px; border-radius: 50%; background: var(--cream-2); border: 2.5px solid var(--orange); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700; color: var(--orange); }
+  .process-step h4 { font-family: var(--font-serif); font-size: 1.05rem; color: var(--brown-deep); margin-bottom: 0.6rem; font-weight: 700; }
+  .process-step p { font-size: 0.85rem; color: var(--text-mid); line-height: 1.75; }
+
+  /* CONTACT */
+  #contact { padding: 7rem 0; background: var(--brown-dark); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .contact-left .section-tag { color: var(--orange-light); }
+  .contact-left .section-tag::before { background: var(--orange-light); }
+  .contact-left p { font-size: 0.95rem; color: #9a7050; line-height: 1.85; margin-bottom: 2.5rem; }
+  .contact-info-list { display: flex; flex-direction: column; gap: 1.2rem; }
+  .ci-item { display: flex; align-items: flex-start; gap: 14px; }
+  .ci-icon { width: 40px; height: 40px; background: rgba(212,121,58,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1.5px solid rgba(212,121,58,0.25); }
+  .ci-icon svg { width: 18px; height: 18px; stroke: var(--orange); fill: none; stroke-width: 1.8; }
+  .ci-lbl { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: #6a4828; margin-bottom: 0.2rem; font-weight: 700; }
+  .ci-val { font-size: 0.9rem; color: #e0c090; font-weight: 500; }
+  .ci-val a { color: var(--orange-light); text-decoration: none; }
+
+  .contact-form { background: var(--cream); border-radius: var(--radius-lg); padding: 2.5rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+  .form-group label { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
+  .form-group input, .form-group select, .form-group textarea {
+    background: #fff; border: 1.5px solid var(--sand); border-radius: var(--radius-md);
+    padding: 12px 14px; color: var(--brown-deep); font-family: var(--font-sans); font-size: 0.9rem; width: 100%;
+    transition: border-color var(--transition);
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--orange); }
+  .form-group textarea { height: 110px; resize: vertical; }
+  .form-submit { background: var(--orange); color: #fff; border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.76rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 14px; border-radius: var(--radius-pill); width: 100%; transition: background var(--transition); }
+  .form-submit:hover { background: var(--orange-deep); }
+
+  /* FOOTER */
+  footer { background: #2c1606; padding: 3.5rem 0 2rem; border-top: 1px solid rgba(255,255,255,0.06); }
+  .footer-inner { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-logo-main { font-family: var(--font-serif); font-size: 1.1rem; color: #f5ddb0; font-weight: 700; display: block; margin-bottom: 0.25rem; }
+  .footer-logo-sub { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: #5a3818; }
+  .footer-brand p { color: #5a3818; font-size: 0.82rem; line-height: 1.75; margin-top: 1rem; }
+  .footer-col h5 { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.2rem; font-weight: 700; }
+  .footer-col a { display: block; color: #5a3818; font-size: 0.84rem; text-decoration: none; margin-bottom: 0.7rem; transition: color var(--transition); font-weight: 500; }
+  .footer-col a:hover { color: #f5ddb0; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+  .footer-bottom p { font-size: 0.76rem; color: #3a2010; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-up { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 3rem 0; max-width: 100%; margin: 0; }
+    .hero-right { display: none; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .test-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: repeat(2, 1fr); }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    nav { display: none; }
+    .nav-toggle { display: flex; }
+    nav.open { display: flex; flex-direction: column; position: fixed; top: 70px; left: 0; right: 0; background: rgba(61,32,8,0.98); padding: 1.5rem 2rem; gap: 1.5rem; }
+  }
+  @media (max-width: 560px) {
+    .services-grid, .process-steps { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-main">Daniel General Contractor</span>
+        <span class="logo-sub">Family-Owned · Maywood, NJ</span>
+      </a>
+      <nav id="main-nav">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#process">Our Process</a>
+        <a href="#contact" class="nav-cta">Free Estimate</a>
+      </nav>
+      <div class="nav-toggle" id="nav-toggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="hero">
+  <div class="container" style="display:contents;">
+    <div class="hero-left" style="padding-left:2rem;">
+      <div class="hero-eyebrow">Family-Owned · Maywood, New Jersey</div>
+      <h1>Your home deserves <em>hands that care.</em></h1>
+      <p>General contracting built on trust, honest pricing, and lasting relationships. Proudly serving Bergen County and the greater NJ area for over a decade.</p>
+      <div class="hero-btns">
+        <a href="#services" class="btn-primary">Explore Services</a>
+        <a href="#contact" class="btn-outline">Get Free Estimate</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-badge">
+        <div class="num">10+</div>
+        <div class="lbl">Years of<br>Experience</div>
+      </div>
+      <div class="hero-info">
+        <div class="hero-info-item">
+          <div class="lbl">Location</div>
+          <div class="val">Maywood, NJ 07607</div>
+        </div>
+        <div class="hero-info-item">
+          <div class="lbl">Service Area</div>
+          <div class="val">Bergen County &amp; surrounding NJ</div>
+        </div>
+        <div class="hero-info-item">
+          <div class="lbl">Licensed &amp; Insured</div>
+          <div class="val">NJ State Certified Contractor</div>
+        </div>
+        <div class="hero-info-item">
+          <div class="lbl">Call Us Today</div>
+          <div class="val"><a href="tel:+12015550100">(201) 555-0100</a></div>
+        </div>
+        <div class="hero-info-item">
+          <div class="lbl">Hours</div>
+          <div class="val">Mon–Sat, 7:00 AM – 6:00 PM</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-item fade-up"><div class="stat-num">250+</div><div class="stat-label">Projects Completed</div></div>
+      <div class="stat-item fade-up" style="transition-delay:.1s"><div class="stat-num">100%</div><div class="stat-label">Licensed &amp; Insured</div></div>
+      <div class="stat-item fade-up" style="transition-delay:.2s"><div class="stat-num">5★</div><div class="stat-label">Client Satisfaction</div></div>
+      <div class="stat-item fade-up" style="transition-delay:.3s"><div class="stat-num">NJ</div><div class="stat-label">State Certified</div></div>
+    </div>
+  </div>
+</div>
+
+<section id="services">
+  <div class="container">
+    <div class="services-header fade-up">
+      <span class="section-tag">What We Do</span>
+      <h2 class="section-title">Built right, from the ground up</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="services-grid">
+
+      <div class="svc-card fade-up">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Home Renovation</h3>
+        <p>Full kitchen, bathroom, basement, and exterior remodels tailored to your family's needs and lifestyle — from design through final inspection.</p>
+      </div>
+
+      <div class="svc-card fade-up" style="transition-delay:.1s">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+        </div>
+        <h3>New Construction</h3>
+        <p>Ground-up residential and commercial builds, fully managed from permitting through the final walkthrough. Every detail, handled.</p>
+      </div>
+
+      <div class="svc-card fade-up" style="transition-delay:.2s">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h3>Repairs &amp; Upgrades</h3>
+        <p>Structural repairs, roofing, drywall, plumbing, and electrical — diagnosed correctly and fixed right the first time.</p>
+      </div>
+
+      <div class="svc-card fade-up" style="transition-delay:.05s">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><line x1="12" y1="12" x2="12" y2="22"/><line x1="3" y1="12" x2="21" y2="12"/></svg>
+        </div>
+        <h3>Room Additions</h3>
+        <p>Seamless home additions — offices, sunrooms, extra bedrooms — built to match your existing structure perfectly.</p>
+      </div>
+
+      <div class="svc-card fade-up" style="transition-delay:.15s">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <h3>Commercial Build-Outs</h3>
+        <p>Office spaces, retail, and mixed-use properties delivered on time, within budget, and up to every code requirement.</p>
+      </div>
+
+      <div class="svc-card fade-up" style="transition-delay:.25s">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Decks &amp; Outdoor Spaces</h3>
+        <p>Custom decks, patios, fencing, and outdoor living areas — built to last through NJ winters and look great every season.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left fade-up">
+        <span class="section-tag">About Us</span>
+        <h2 class="section-title">A neighbor you can trust with your home</h2>
+        <div class="divider"></div>
+        <p>Daniel General Contractor LLC was founded right here in Maywood because we believe every homeowner deserves a contractor who shows up, communicates clearly, and takes real pride in their work.</p>
+        <p>We're a family-owned and operated business with deep roots in Bergen County. We've built our reputation one project at a time — and most of our work comes from neighbors referring neighbors.</p>
+        <ul class="about-checklist">
+          <li>Family-owned and operated since day one</li>
+          <li>NJ Licensed General Contractor, fully insured</li>
+          <li>Transparent, itemized estimates — no surprise costs</li>
+          <li>Bilingual team — English and Spanish</li>
+          <li>Serving Maywood, Hackensack, Paramus, Fair Lawn &amp; beyond</li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="display:inline-block; margin-top:0.5rem;">Work With Us</a>
+      </div>
+      <div class="about-right fade-up" style="transition-delay:.15s">
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h4>The Family Promise</h4>
+          <p>When you call us, you talk to us directly. We show up on time, keep your home clean, and don't leave until you're genuinely happy. That's not a policy — it's just how family operates.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h4>Licensed &amp; Fully Insured</h4>
+          <p>We carry full general liability insurance and workers' compensation on every job — protecting you, your property, and every worker on your project.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h4>Honest Pricing, Always</h4>
+          <p>You'll receive a clear, itemized written estimate before any work begins. No hidden fees, no last-minute surprises — just straightforward communication from start to finish.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="testimonial-strip">
+  <div class="container">
+    <span class="section-tag fade-up">What Neighbors Say</span>
+    <div class="test-grid">
+      <div class="test-card fade-up">
+        <div class="test-stars">★★★★★</div>
+        <p>"Daniel and his team renovated our entire kitchen and it came out absolutely beautiful. They were on time every day, kept the house clean, and communicated every step. Couldn't recommend them more."</p>
+        <div class="test-author">
+          <div class="test-avatar">MR</div>
+          <div><div class="test-name">Maria R.</div><div class="test-loc">Maywood, NJ</div></div>
+        </div>
+      </div>
+      <div class="test-card fade-up" style="transition-delay:.1s">
+        <div class="test-stars">★★★★★</div>
+        <p>"We had them build an addition to our home. Professional, honest, and the quality was outstanding. They treated our house like it was their own. We'll absolutely use them again."</p>
+        <div class="test-author">
+          <div class="test-avatar">JP</div>
+          <div><div class="test-name">James P.</div><div class="test-loc">Hackensack, NJ</div></div>
+        </div>
+      </div>
+      <div class="test-card fade-up" style="transition-delay:.2s">
+        <div class="test-stars">★★★★★</div>
+        <p>"Fair pricing, quality work, and they actually showed up when promised — which is rare. Our bathroom remodel looks incredible. Highly recommend this family to anyone in Bergen County."</p>
+        <div class="test-author">
+          <div class="test-avatar">LC</div>
+          <div><div class="test-name">Lisa C.</div><div class="test-loc">Fair Lawn, NJ</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="process">
+  <div class="container">
+    <div class="process-header fade-up">
+      <span class="section-tag">How It Works</span>
+      <h2 class="section-title">Simple. Honest. Done right.</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="process-steps">
+      <div class="process-step fade-up">
+        <div class="step-num">1</div>
+        <h4>Free Consultation</h4>
+        <p>We visit your site, listen to your goals, and assess the scope together. No obligations, no sales pressure.</p>
+      </div>
+      <div class="process-step fade-up" style="transition-delay:.1s">
+        <div class="step-num">2</div>
+        <h4>Detailed Estimate</h4>
+        <p>You receive a clear written estimate — materials, labor, and timeline broken down so there are no surprises.</p>
+      </div>
+      <div class="process-step fade-up" style="transition-delay:.2s">
+        <div class="step-num">3</div>
+        <h4>Work Begins</h4>
+        <p>Our crew gets to work on schedule. We keep the site clean and update you at every milestone.</p>
+      </div>
+      <div class="process-step fade-up" style="transition-delay:.3s">
+        <div class="step-num">4</div>
+        <h4>Final Walkthrough</h4>
+        <p>We go through every detail together before calling it done. Your satisfaction is the standard, not a formality.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left fade-up">
+        <span class="section-tag">Get In Touch</span>
+        <h2 class="section-title light">Ready to start your project?</h2>
+        <div class="divider"></div>
+        <p>Whether you have detailed plans or just a rough idea, we're happy to talk. Reach out for a free, no-pressure estimate and we'll respond within 24 hours.</p>
+        <div class="contact-info-list">
+          <div class="ci-item">
+            <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><div class="ci-lbl">Location</div><div class="ci-val">Maywood, NJ 07607</div></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.15a16 16 0 006.94 6.94l1.52-1.52a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 15.92z"/></svg></div>
+            <div><div class="ci-lbl">Phone</div><div class="ci-val"><a href="tel:+12015550100">(201) 555-0100</a></div></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div class="ci-lbl">Email</div><div class="ci-val"><a href="mailto:info@danielgcllc.com">info@danielgcllc.com</a></div></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div><div class="ci-lbl">Hours</div><div class="ci-val">Mon–Sat, 7:00 AM – 6:00 PM</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up" style="transition-delay:.15s">
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="form-group"><label for="fname">First Name</label><input type="text" id="fname" placeholder="Maria" /></div>
+            <div class="form-group"><label for="lname">Last Name</label><input type="text" id="lname" placeholder="Rodriguez" /></div>
+          </div>
+          <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" placeholder="you@example.com" /></div>
+          <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" placeholder="(201) 555-0000" /></div>
+          <div class="form-group">
+            <label for="service">Type of Project</label>
+            <select id="service">
+              <option value="">Select a service...</option>
+              <option>Home Renovation</option>
+              <option>New Construction</option>
+              <option>Repairs &amp; Upgrades</option>
+              <option>Room Addition</option>
+              <option>Commercial Build-Out</option>
+              <option>Deck / Outdoor Space</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group"><label for="message">Tell Us About Your Project</label><textarea id="message" placeholder="Share as much or as little as you'd like — we'll help figure out the rest."></textarea></div>
+          <button class="form-submit" type="button">Request Free Estimate</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo-main">Daniel General Contractor</span>
+        <span class="footer-logo-sub">LLC · Family-Owned · Maywood, NJ</span>
+        <p>Locally owned and operated since day one. Serving Bergen County and surrounding New Jersey communities with quality craftsmanship and honest service.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a href="#services">Home Renovation</a>
+        <a href="#services">New Construction</a>
+        <a href="#services">Repairs &amp; Upgrades</a>
+        <a href="#services">Room Additions</a>
+        <a href="#services">Commercial Build-Outs</a>
+        <a href="#services">Decks &amp; Outdoor</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="#about">About Us</a>
+        <a href="#process">Our Process</a>
+        <a href="#contact">Get an Estimate</a>
+        <a href="tel:+12015550100">(201) 555-0100</a>
+        <a href="mailto:info@danielgcllc.com">info@danielgcllc.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Daniel General Contractor LLC. All rights reserved. Maywood, NJ 07607.</p>
+      <p>Licensed &amp; Insured · NJ State Certified · Family-Owned</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  const toggle = document.getElementById('nav-toggle');
+  const nav = document.getElementById('main-nav');
+  toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('site-header').style.boxShadow =
+      window.scrollY > 20 ? '0 4px 24px rgba(0,0,0,0.3)' : 'none';
+  });
+
+  document.querySelector('.form-submit').addEventListener('click', function() {
+    this.textContent = "Message sent! We'll be in touch soon.";
+    this.style.background = '#5a8a3a';
+    setTimeout(() => {
+      this.textContent = 'Request Free Estimate';
+      this.style.background = '';
+    }, 4000);
+  });
+</script>
+</body>
+</html>
