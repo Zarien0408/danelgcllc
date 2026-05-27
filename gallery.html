@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Project Gallery | Daniel General Contractor LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,600&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --brown-deep:   #3d2008;
+    --brown-dark:   #4a2c0a;
+    --orange:       #d4793a;
+    --orange-deep:  #b85e24;
+    --orange-light: #f5a85a;
+    --cream:        #fdf8f2;
+    --cream-2:      #f7efe3;
+    --sand:         #e8ddd0;
+    --text-warm:    #5a3a20;
+    --text-mid:     #7a6050;
+    --text-muted:   #9a8070;
+    --font-serif:   'Lora', Georgia, serif;
+    --font-sans:    'Nunito', system-ui, sans-serif;
+    --radius-md:    10px;
+    --radius-lg:    16px;
+    --radius-pill:  999px;
+    --transition:   0.3s ease;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--cream); color: var(--brown-deep); overflow-x: hidden; }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
+
+  /* ---- HEADER ---- */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(61,32,8,0.97); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(212,121,58,0.2);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+  .logo { text-decoration: none; display: flex; flex-direction: column; }
+  .logo-main { font-family: var(--font-serif); font-size: 1.1rem; color: #f5ddb0; font-weight: 700; line-height: 1.1; }
+  .logo-sub { font-size: 0.58rem; letter-spacing: 0.22em; color: #a07850; text-transform: uppercase; margin-top: 2px; }
+  nav { display: flex; align-items: center; gap: 2rem; }
+  nav a { color: #c09070; font-size: 0.82rem; letter-spacing: 0.04em; text-decoration: none; transition: color var(--transition); font-weight: 500; }
+  nav a:hover { color: #f5ddb0; }
+  nav a.active { color: var(--orange-light); }
+  .nav-cta {
+    background: var(--orange) !important; color: #fff !important;
+    font-size: 0.72rem !important; font-weight: 700 !important; letter-spacing: 0.1em !important;
+    padding: 10px 22px; border-radius: var(--radius-pill); text-transform: uppercase;
+  }
+  .nav-cta:hover { background: var(--orange-deep) !important; }
+  .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .nav-toggle span { display: block; width: 24px; height: 2px; background: #f5ddb0; }
+
+  /* ---- HERO BANNER ---- */
+  .gallery-hero {
+    padding-top: 70px;
+    background: var(--brown-deep);
+    text-align: center;
+    padding-bottom: 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .gallery-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(135deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 14px);
+  }
+  .gallery-hero-inner { position: relative; z-index: 1; padding: 3.5rem 0 0; }
+  .section-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; color: var(--orange); margin-bottom: 0.8rem; }
+  .section-tag::before { content: ''; display: block; width: 24px; height: 2px; background: var(--orange); border-radius: 2px; }
+  .gallery-hero h1 { font-family: var(--font-serif); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; color: #fdf2e3; line-height: 1.15; margin-bottom: 1rem; }
+  .gallery-hero h1 em { color: var(--orange-light); font-style: italic; }
+  .gallery-hero p { font-size: 1rem; color: #9a7050; max-width: 520px; margin: 0 auto; line-height: 1.8; }
+
+  /* ---- FILTER TABS ---- */
+  .filter-bar { background: var(--cream-2); border-bottom: 1px solid var(--sand); padding: 1.2rem 0; position: sticky; top: 70px; z-index: 50; }
+  .filter-inner { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+  .filter-btn {
+    font-family: var(--font-sans); font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;
+    padding: 8px 20px; border-radius: var(--radius-pill);
+    border: 1.5px solid var(--sand); background: #fff; color: var(--text-mid);
+    transition: all var(--transition);
+  }
+  .filter-btn:hover { border-color: var(--orange); color: var(--orange); }
+  .filter-btn.active { background: var(--orange); border-color: var(--orange); color: #fff; }
+
+  /* ---- GALLERY GRID ---- */
+  .gallery-section { padding: 4rem 0 6rem; }
+  .category-block { margin-bottom: 4.5rem; }
+  .category-block.hidden { display: none; }
+  .category-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+  .category-label {
+    font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700; color: var(--brown-deep);
+  }
+  .category-line { flex: 1; height: 1px; background: var(--sand); }
+  .category-count { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+
+  /* ---- BEFORE/AFTER SLIDER ---- */
+  .project-card { border-radius: var(--radius-lg); overflow: hidden; background: #fff; border: 1px solid var(--sand); box-shadow: 0 2px 12px rgba(61,32,8,0.06); }
+  .slider-wrap {
+    position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden;
+    cursor: ew-resize; user-select: none;
+  }
+  .slider-img { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .slider-img img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+  .slider-img.after { clip-path: inset(0 50% 0 0); }
+
+  /* Single image (during shot) */
+  .single-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; }
+  .single-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .slider-handle {
+    position: absolute; top: 0; bottom: 0; left: 50%;
+    width: 3px; background: #fff; transform: translateX(-50%);
+    cursor: ew-resize; z-index: 10;
+    box-shadow: 0 0 8px rgba(0,0,0,0.4);
+  }
+  .slider-handle::before, .slider-handle::after {
+    content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--orange); border: 3px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .slider-handle::before { top: 50%; transform: translate(-50%, -50%); }
+  .slider-handle::after { display: none; }
+
+  .slider-arrows {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    z-index: 11; pointer-events: none;
+    display: flex; gap: 6px; align-items: center;
+  }
+  .slider-arrows svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 2.5; }
+
+  .badge-before, .badge-after, .badge-during {
+    position: absolute; top: 10px; z-index: 9;
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: var(--radius-pill);
+  }
+  .badge-before { left: 10px; background: rgba(61,32,8,0.75); color: #f5ddb0; }
+  .badge-after  { right: 10px; background: rgba(212,121,58,0.85); color: #fff; }
+  .badge-during { left: 10px; background: rgba(61,32,8,0.75); color: #f5ddb0; }
+
+  .project-info { padding: 1.1rem 1.3rem; }
+  .project-title { font-family: var(--font-serif); font-size: 0.98rem; font-weight: 700; color: var(--brown-deep); margin-bottom: 0.2rem; }
+  .project-sub { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* ---- LIGHTBOX ---- */
+  .lightbox {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: rgba(30,12,2,0.93); backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
+  .lightbox-inner img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: var(--radius-md); display: block; }
+  .lightbox-close {
+    position: absolute; top: -44px; right: 0;
+    background: none; border: none; color: #fff; font-size: 1.8rem; cursor: pointer; line-height: 1;
+  }
+  .lightbox-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(212,121,58,0.8); border: none; color: #fff;
+    width: 44px; height: 44px; border-radius: 50%; font-size: 1.2rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lightbox-prev { left: -56px; }
+  .lightbox-next { right: -56px; }
+  .lightbox-caption { text-align: center; color: #c09070; font-size: 0.82rem; margin-top: 0.75rem; }
+
+  /* ---- CTA STRIP ---- */
+  .cta-strip { background: var(--orange); padding: 3.5rem 0; text-align: center; }
+  .cta-strip h2 { font-family: var(--font-serif); font-size: clamp(1.6rem, 2.5vw, 2.2rem); color: #fff; margin-bottom: 0.75rem; font-weight: 700; }
+  .cta-strip p { color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-bottom: 2rem; }
+  .btn-white { background: #fff; color: var(--orange); font-size: 0.76rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 32px; border-radius: var(--radius-pill); text-decoration: none; transition: background var(--transition); display: inline-block; }
+  .btn-white:hover { background: #fdf2e3; }
+
+  /* ---- FOOTER ---- */
+  footer { background: #2c1606; padding: 2.5rem 0 1.5rem; border-top: 1px solid rgba(255,255,255,0.06); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+  .footer-bottom p { font-size: 0.76rem; color: #3a2010; }
+  .footer-logo { font-family: var(--font-serif); font-size: 1rem; color: #f5ddb0; font-weight: 700; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    nav { display: none; }
+    .nav-toggle { display: flex; }
+    nav.open { display: flex; flex-direction: column; position: fixed; top: 70px; left: 0; right: 0; background: rgba(61,32,8,0.98); padding: 1.5rem 2rem; gap: 1.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .lightbox-prev { left: -10px; }
+    .lightbox-next { right: -10px; }
+  }
+
+  /* Fade in */
+  .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="site-header">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-main">Daniel General Contractor</span>
+        <span class="logo-sub">Family-Owned · Maywood, NJ</span>
+      </a>
+      <nav id="main-nav">
+        <a href="index.html#services">Services</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#process">Our Process</a>
+        <a href="gallery.html" class="active">Gallery</a>
+        <a href="index.html#contact" class="nav-cta">Free Estimate</a>
+      </nav>
+      <div class="nav-toggle" id="nav-toggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO BANNER -->
+<div class="gallery-hero">
+  <div class="gallery-hero-inner">
+    <span class="section-tag">Our Work</span>
+    <h1>Real projects.<br><em>Real transformations.</em></h1>
+    <p>Every photo tells the story of a family's home made better. Drag the slider to see the before and after on each project.</p>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="container">
+    <div class="filter-inner">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="kitchen">Kitchen</button>
+      <button class="filter-btn" data-filter="bathroom">Bathroom</button>
+      <button class="filter-btn" data-filter="garage">Garage</button>
+      <button class="filter-btn" data-filter="siding">Siding</button>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section class="gallery-section">
+  <div class="container">
+
+    <!-- KITCHEN -->
+    <div class="category-block fade-up" data-category="kitchen">
+      <div class="category-header">
+        <span class="category-label">Kitchen</span>
+        <span class="category-line"></span>
+        <span class="category-count">3 Projects</span>
+      </div>
+      <div class="projects-grid">
+
+        <!-- Kitchen Project 1 -->
+        <div class="project-card">
+          <div class="slider-wrap" data-lightbox-group="kitchen">
+            <div class="slider-img before">
+              <img src="WhatsApp Image 2026-05-24 at 6.14.20 PM.jpeg" alt="Kitchen before - Project 1" loading="lazy" />
+              <span class="badge-before">Before</span>
+            </div>
+            <div class="slider-img after">
+              <img src="WhatsApp Image 2026-05-24(2).jpeg" alt="Kitchen after - Project 1" loading="lazy" />
+              <span class="badge-after">After</span>
+            </div>
+            <div class="slider-handle">
+              <div class="slider-arrows">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title">Kitchen Renovation</div>
+            <div class="project-sub">Maywood, NJ · Full remodel</div>
+          </div>
+        </div>
+
+        <!-- Kitchen Project 2 -->
+        <div class="project-card">
+          <div class="slider-wrap" data-lightbox-group="kitchen">
+            <div class="slider-img before">
+              <img src="WhatsApp Image 2026-05-24(1).jpeg" alt="Kitchen before - Project 2" loading="lazy" />
+              <span class="badge-before">Before</span>
+            </div>
+            <div class="slider-img after">
+              <img src="WhatsApp Image 2026-05-24(2).jpeg" alt="Kitchen after - Project 2" loading="lazy" />
+              <span class="badge-after">After</span>
+            </div>
+            <div class="slider-handle">
+              <div class="slider-arrows">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title">Kitchen Renovation</div>
+            <div class="project-sub">Bergen County · Cabinet &amp; countertop update</div>
+          </div>
+        </div>
+
+        <!-- Kitchen Project 3 -->
+        <div class="project-card">
+          <div class="slider-wrap" data-lightbox-group="kitchen">
+            <div class="slider-img before">
+              <img src="WhatsApp Image 2026-05-24(14).jpeg" alt="Kitchen before - Project 3" loading="lazy" />
+              <span class="badge-before">Before</span>
+            </div>
+            <div class="slider-img after">
+              <img src="WhatsApp Image 2026-05-24(15).jpeg" alt="Kitchen after - Project 3" loading="lazy" />
+              <span class="badge-after">After</span>
+            </div>
+            <div class="slider-handle">
+              <div class="slider-arrows">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title">Kitchen Renovation</div>
+            <div class="project-sub">Bergen County · Full kitchen remodel</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BATHROOM -->
+    <div class="category-block fade-up" data-category="bathroom">
+      <div class="category-header">
+        <span class="category-label">Bathroom</span>
+        <span class="category-line"></span>
+        <span class="category-count">2 Projects</span>
+      </div>
+      <div class="projects-grid">
+
+        <!-- Bathroom Project 1 -->
+        <div class="project-card">
+          <div class="slider-wrap" data-lightbox-group="bathroom">
+            <div class="slider-img before">
+              <img src="WhatsApp Image 2026-05-24(3).jpeg" alt="Bathroom before - Project 1" loading="lazy" />
+              <span class="badge-before">Before</span>
+            </div>
+            <div class="slider-img after">
+              <img src="WhatsApp Image 2026-05-24(4).jpeg" alt="Bathroom after - Project 1" loading="lazy" />
+              <span class="badge-after">After</span>
+            </div>
+            <div class="slider-handle">
+              <div class="slider-arrows">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title">Bathroom Remodel</div>
+            <div class="project-sub">Maywood, NJ · Full bath renovation</div>
+          </div>
+        </div>
+
+        <!-- Bathroom Project 2 -->
+        <div class="project-card">
+          <div class="slider-wrap" data-lightbox-group="bathroom">
+            <div class="slider-img before">
+              <img src="WhatsApp Image 2026-05-24(10).jpeg" alt="Bathroom before - Project 2" loading="lazy" />
+              <span class="badge-before">Before</span>
+            </div>
+            <div class="slider-img after">
+              <img src="WhatsApp Image 2026-05-24(11).jpeg" alt="Bathroom after - Project 2" loading="lazy" />
+              <span class="badge-after">After</span>
+            </div>
+            <div class="slider-handle">
+              <div class="slider-arrows">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title">Bathroom Remodel</div>
+            <div class="project-sub">Bergen County · Tile &amp; fixture upgrade</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- GARAGE -->
+    <div class="category-block fade-up" data-category="garage">
+      <div class="category-header">
+        <span class="category-label">Garage</span>
+        <span class="category-line"></span>
+        <span class="category-count">1 Project</span>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <div class="slider-wrap" data-lightbox-group="garage">
+            <div class="slider-img before">
+              <img src="WhatsApp Image 2026-05-24(5).jpeg" alt="Garage before" loading="lazy" />
+              <span class="badge-before">Before</span>
+            </div>
+            <div class="slider-img after">
+              <img src="WhatsApp Image 2026-05-24(6).jpeg" alt="Garage after" loading="lazy" />
+              <span class="badge-after">After</span>
+            </div>
+            <div class="slider-handle">
+              <div class="slider-arrows">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title">Garage Renovation</div>
+            <div class="project-sub">Bergen County · Full garage overhaul</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SIDING -->
+    <div class="category-block fade-up" data-category="siding">
+      <div class="category-header">
+        <span class="category-label">Siding</span>
+        <span class="category-line"></span>
+        <span class="category-count">1 Project · 3 Stages</span>
+      </div>
+      <div class="projects-grid">
+
+        <!-- Siding Before/After Slider -->
+        <div class="project-card">
+          <div class="slider-wrap" data-lightbox-group="siding">
+            <div class="slider-img before">
+              <img src="WhatsApp Image 2026-05-24(7).jpeg" alt="Siding before" loading="lazy" />
+              <span class="badge-before">Before</span>
+            </div>
+            <div class="slider-img after">
+              <img src="WhatsApp Image 2026-05-24(9).jpeg" alt="Siding after" loading="lazy" />
+              <span class="badge-after">After</span>
+            </div>
+            <div class="slider-handle">
+              <div class="slider-arrows">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title">Exterior Siding</div>
+            <div class="project-sub">Bergen County · Full siding replacement</div>
+          </div>
+        </div>
+
+        <!-- Siding During (standalone) -->
+        <div class="project-card">
+          <div class="single-wrap">
+            <img src="WhatsApp Image 2026-05-24(8).jpeg" alt="Siding in progress" loading="lazy" />
+            <span class="badge-during">In Progress</span>
+          </div>
+          <div class="project-info">
+            <div class="project-title">Exterior Siding · Mid-Project</div>
+            <div class="project-sub">Bergen County · Installation phase</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <div class="container">
+    <h2>Like what you see?</h2>
+    <p>Let's talk about what we can do for your home. Free estimates, no pressure.</p>
+    <a href="index.html#contact" class="btn-white">Get a Free Estimate</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <span class="footer-logo">Daniel General Contractor LLC</span>
+      <p>&copy; 2025 · Maywood, NJ 07607 · Licensed &amp; Insured · Family-Owned</p>
+    </div>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lb-close">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lb-prev">&#8592;</button>
+    <img src="" alt="" id="lb-img" />
+    <button class="lightbox-nav lightbox-next" id="lb-next">&#8594;</button>
+    <div class="lightbox-caption" id="lb-caption"></div>
+  </div>
+</div>
+
+<script>
+  // ---- MOBILE NAV ----
+  const toggle = document.getElementById('nav-toggle');
+  const nav = document.getElementById('main-nav');
+  toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+  // ---- STICKY HEADER SHADOW ----
+  window.addEventListener('scroll', () => {
+    document.getElementById('site-header').style.boxShadow =
+      window.scrollY > 20 ? '0 4px 24px rgba(0,0,0,0.3)' : 'none';
+  });
+
+  // ---- SCROLL ANIMATIONS ----
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ---- FILTER BUTTONS ----
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const filter = this.dataset.filter;
+      document.querySelectorAll('.category-block').forEach(block => {
+        if (filter === 'all' || block.dataset.category === filter) {
+          block.classList.remove('hidden');
+        } else {
+          block.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // ---- BEFORE/AFTER SLIDER ----
+  document.querySelectorAll('.slider-wrap').forEach(wrap => {
+    const afterImg = wrap.querySelector('.slider-img.after');
+    const handle   = wrap.querySelector('.slider-handle');
+    let dragging = false;
+
+    function setPosition(x) {
+      const rect = wrap.getBoundingClientRect();
+      let pct = ((x - rect.left) / rect.width) * 100;
+      pct = Math.min(Math.max(pct, 2), 98);
+      afterImg.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+      handle.style.left = pct + '%';
+    }
+
+    // Mouse
+    handle.addEventListener('mousedown', e => { dragging = true; e.preventDefault(); });
+    window.addEventListener('mousemove', e => { if (dragging) setPosition(e.clientX); });
+    window.addEventListener('mouseup', () => { dragging = false; });
+
+    // Touch
+    handle.addEventListener('touchstart', e => { dragging = true; e.preventDefault(); }, { passive: false });
+    window.addEventListener('touchmove', e => { if (dragging) setPosition(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchend', () => { dragging = false; });
+
+    // Click on wrap
+    wrap.addEventListener('click', e => { if (!dragging) setPosition(e.clientX); });
+  });
+
+  // ---- LIGHTBOX ----
+  const lightbox  = document.getElementById('lightbox');
+  const lbImg     = document.getElementById('lb-img');
+  const lbCaption = document.getElementById('lb-caption');
+  let lbImages = [], lbIndex = 0;
+
+  function openLightbox(imgs, idx) {
+    lbImages = imgs; lbIndex = idx;
+    lbImg.src = lbImages[lbIndex].src;
+    lbImg.alt = lbImages[lbIndex].alt;
+    lbCaption.textContent = lbImages[lbIndex].alt;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function lbNav(dir) {
+    lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+    lbImg.src = lbImages[lbIndex].src;
+    lbCaption.textContent = lbImages[lbIndex].alt;
+  }
+
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lb-prev').addEventListener('click', () => lbNav(-1));
+  document.getElementById('lb-next').addEventListener('click', () => lbNav(1));
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lbNav(-1);
+    if (e.key === 'ArrowRight') lbNav(1);
+  });
+
+  // Attach click to all project images
+  document.querySelectorAll('.slider-wrap, .single-wrap').forEach(wrap => {
+    wrap.addEventListener('click', function() {
+      const allImgs = Array.from(document.querySelectorAll('.slider-img img, .single-wrap img'));
+      const clickedImgs = Array.from(this.querySelectorAll('img'));
+      const idx = allImgs.indexOf(clickedImgs[0]);
+      openLightbox(allImgs, idx >= 0 ? idx : 0);
+    });
+  });
+</script>
+</body>
+</html>
