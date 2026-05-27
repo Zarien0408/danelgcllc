@@ -603,49 +603,71 @@
       window.scrollY > 20 ? '0 4px 24px rgba(0,0,0,0.3)' : 'none';
   });
 
-  document.getElementById('form-submit-btn').addEventListener('click', function() {
-    const fname   = document.getElementById('fname').value.trim();
-    const lname   = document.getElementById('lname').value.trim();
-    const email   = document.getElementById('email').value.trim();
-    const phone   = document.getElementById('phone').value.trim();
-    const service = document.getElementById('service').value.trim();
-    const message = document.getElementById('message').value.trim();
+  // Hidden iframe to absorb Google Forms redirect silently
+  (function() {
+    const iframe = document.createElement('iframe');
+    iframe.name = 'hidden-form-target';
+    iframe.style.cssText = 'display:none; width:0; height:0; border:none; position:absolute;';
+    document.body.appendChild(iframe);
 
-    // Basic validation
-    if (!fname || !lname || !email || !message) {
-      alert('Please fill in at least your name, email, and project details.');
-      return;
-    }
+    // Build a hidden native form pointing at Google Forms
+    const gForm = document.createElement('form');
+    gForm.method = 'POST';
+    gForm.action = 'https://docs.google.com/forms/d/e/1FAIpQLSddM0-jHlXXBrLDrhM1SPnVw5hxF1wso_cFzR4TGTBOi0u2Aw/formResponse';
+    gForm.target = 'hidden-form-target';
+    gForm.style.display = 'none';
 
-    const btn = this;
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-    btn.style.opacity = '0.7';
+    const fields = {
+      'entry.751424564':  '',
+      'entry.907626371':  '',
+      'entry.2015512202': '',
+      'entry.590556585':  '',
+      'entry.1402999898': '',
+      'entry.2096440523': ''
+    };
 
-    const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSddM0-jHlXXBrLDrhM1SPnVw5hxF1wso_cFzR4TGTBOi0u2Aw/formResponse';
-
-    const formData = new FormData();
-    formData.append('entry.751424564',  fname);
-    formData.append('entry.907626371',  lname);
-    formData.append('entry.2015512202', email);
-    formData.append('entry.590556585',  phone);
-    formData.append('entry.1402999898', service);
-    formData.append('entry.2096440523', message);
-
-    // Use no-cors fetch — Google Forms doesn't allow CORS but the submission still goes through
-    fetch(GOOGLE_FORM_ACTION, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: formData
-    }).then(() => {
-      document.getElementById('form-fields').style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
-    }).catch(() => {
-      // no-cors means we won't get an error even on success, so show success regardless
-      document.getElementById('form-fields').style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
+    const inputs = {};
+    Object.keys(fields).forEach(name => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = name;
+      gForm.appendChild(input);
+      inputs[name] = input;
     });
-  });
+
+    document.body.appendChild(gForm);
+
+    document.getElementById('form-submit-btn').addEventListener('click', function() {
+      const fname   = document.getElementById('fname').value.trim();
+      const lname   = document.getElementById('lname').value.trim();
+      const email   = document.getElementById('email').value.trim();
+      const phone   = document.getElementById('phone').value.trim();
+      const service = document.getElementById('service').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!fname || !lname || !email || !message) {
+        alert('Please fill in at least your name, email, and project details.');
+        return;
+      }
+
+      // Populate hidden form fields
+      inputs['entry.751424564'].value  = fname;
+      inputs['entry.907626371'].value  = lname;
+      inputs['entry.2015512202'].value = email;
+      inputs['entry.590556585'].value  = phone;
+      inputs['entry.1402999898'].value = service;
+      inputs['entry.2096440523'].value = message;
+
+      // Submit silently into the hidden iframe
+      gForm.submit();
+
+      // Show success immediately — iframe absorbs Google's redirect page
+      setTimeout(() => {
+        document.getElementById('form-fields').style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      }, 500);
+    });
+  })();
 </script>
 </body>
 </html>
